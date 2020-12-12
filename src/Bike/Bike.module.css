@@ -1,0 +1,12 @@
+.Bike {
+    margin-top: 45px;
+    padding:0 0 10px 0 ;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+    justify-content: center;
+    width: 400px;
+    border:2px solid red ;
+    box-sizing: border-box;
+}
