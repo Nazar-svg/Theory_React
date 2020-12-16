@@ -1,73 +1,68 @@
 import React, { Component } from 'react';
 import './App.css';
-import Bike from './Bike/Bike'
-import Counter from './Counter/Counter'
-import ErrorBaundery from './ErrorBaundery/ErrorBaundery'
+import Bike from './Bike/Bike';
+import ErrorBaundery from './ErrorBaundery/ErrorBaundery';
+import Nav from './Nav/Nav';
 
 class App extends Component {
   constructor(props) {
-    super()
+    super();
     this.state = {
       bikes: [
         { name: 'merida', year: 2016 },
         { name: 'cube', year: 2012 },
-        { name: 'specialized', year: 2019 }
+        { name: 'specialized', year: 2019 },
       ],
       title: 'road bike',
-      shownBikes: false
-    }
+      shownBikes: false,
+    };
   }
 
   onChangeName(name, id) {
-    const bike = this.state.bikes[id]
-    bike.name = name
-    const bikes = [...this.state.bikes]
-    bikes[id] = bike
+    const bike = this.state.bikes[id];
+    bike.name = name;
+    const bikes = [...this.state.bikes];
+    bikes[id] = bike;
     this.setState({
-      bikes
-    })
+      bikes,
+    });
   }
   onDeleteHandler = (id) => {
-    const bikes = [...this.state.bikes]
-    bikes.splice(id, 1)
-    this.setState({ bikes })
-  }
+    const bikes = [...this.state.bikes];
+    bikes.splice(id, 1);
+    this.setState({ bikes });
+  };
   showBikeHandler = () => {
     this.setState({
-      shownBikes: !this.state.shownBikes
-    })
-  }
-
+      shownBikes: !this.state.shownBikes,
+    });
+  };
 
   render() {
     return (
       <div className="App">
+        <Nav />
         <h1>{this.state.title}</h1>
+
         <button onClick={this.showBikeHandler}>Shown Bike</button>
-
-        <Counter />
-
-        {
-          this.state.shownBikes
-            ?
-            this.state.bikes.map((item, id) => {
+        {this.state.shownBikes
+          ? this.state.bikes.map((item, id) => {
               return (
-                <ErrorBaundery  key={id}>
-                <Bike
-                  name={item.name}
-                  year={item.year}
-                  onDelete={() => this.onDeleteHandler(id)}
-                  onChangeName={(event) => this.onChangeName(event.target.value, id)}
-                />
+                <ErrorBaundery key={id}>
+                  <Bike
+                    name={item.name}
+                    year={item.year}
+                    onDelete={() => this.onDeleteHandler(id)}
+                    onChangeName={(event) =>
+                      this.onChangeName(event.target.value, id)
+                    }
+                  />
                 </ErrorBaundery>
-              )
+              );
             })
-            :
-            null
-        }
-        
+          : null}
       </div>
-    )
+    );
   }
 }
 
